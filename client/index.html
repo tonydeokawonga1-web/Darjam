@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#070c10" />
+  <meta name="description" content="DarJam shows live traffic-jam levels across Dar es Salaam, Tanzania — road by road, with rain and community reports." />
+  <title>DarJam — Dar es Salaam traffic, live</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" role="img">
+            <rect x="8.5" y="3" width="15" height="26" rx="5" fill="#0f1a20" stroke="rgba(255,255,255,.22)" />
+            <circle cx="16" cy="9.5" r="2.7" fill="#ef4444" opacity=".35" />
+            <circle cx="16" cy="16" r="2.7" fill="#f5c451" opacity=".45" />
+            <circle cx="16" cy="22.5" r="2.7" fill="#22c55e" />
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">Dar<span>Jam</span></span>
+          <span class="brand-sub">Msongamano · Dar es Salaam</span>
+        </span>
+      </div>
+
+      <div class="topbar-meta">
+        <div class="weather-pill" id="weatherPill" title="Live weather">
+          <span class="dot"></span><span id="weatherText">Loading weather</span>
+        </div>
+        <div class="clock" aria-label="Dar es Salaam time">
+          <span id="clockTime">--:--</span><span class="clock-zone">EAT</span>
+        </div>
+        <button class="icon-btn" id="refreshBtn" aria-label="Refresh traffic data" title="Refresh">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6" /></svg>
+        </button>
+        <button class="icon-btn" id="shareBtn" aria-label="Share DarJam" title="Share DarJam">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M12 3l-4 4M12 3l4 4M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="panel" aria-label="Traffic details">
+        <nav class="tabs" role="tablist" aria-label="Sections" id="tabs">
+          <button class="tab is-active" data-tab="live" role="tab" aria-selected="true">Live</button>
+          <button class="tab" data-tab="roads" role="tab" aria-selected="false">Roads</button>
+          <button class="tab" data-tab="forecast" role="tab" aria-selected="false">Forecast</button>
+          <button class="tab" data-tab="reports" role="tab" aria-selected="false">Reports<span class="tab-count" id="reportCount">0</span></button>
+        </nav>
+
+        <div class="panel-body" id="panelBody">
+          <section class="view" data-view="live" id="view-live">
+            <div class="hero card" id="hero">
+              <div class="skeleton skeleton-ring"></div>
+              <div class="skeleton-copy">
+                <div class="skeleton skeleton-line w40"></div>
+                <div class="skeleton skeleton-line w70 tall"></div>
+                <div class="skeleton skeleton-line w55"></div>
+              </div>
+            </div>
+
+            <div class="section">
+              <div class="section-head">
+                <h2>Heaviest right now</h2>
+                <button class="link" data-goto="roads">All roads</button>
+              </div>
+              <div class="road-list" id="worstList">
+                <div class="skeleton skeleton-row"></div>
+                <div class="skeleton skeleton-row"></div>
+                <div class="skeleton skeleton-row"></div>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2>Why the roads look like this</h2>
+              <div class="rain-card" id="rainCard"></div>
+            </div>
+
+            <div class="section model-note">
+              <p><strong>How it works.</strong> DarJam blends the Dar time-of-day demand curve, direction, live rain from Open-Meteo and reports from drivers. No live speed feed is required.</p>
+            </div>
+          </section>
+
+          <section class="view is-hidden" data-view="roads" id="view-roads">
+            <div class="view-head">
+              <div>
+                <h2>All corridors</h2>
+                <p>Ranked by the busiest direction.</p>
+              </div>
+              <span class="mini-legend" id="roadsLegend"></span>
+            </div>
+            <div class="road-list" id="roadsList"></div>
+          </section>
+
+          <section class="view is-hidden" data-view="forecast" id="view-forecast">
+            <div class="view-head">
+              <div>
+                <h2>Next 24 hours</h2>
+                <p>City-wide jam score and rain.</p>
+              </div>
+            </div>
+            <div class="chart-card card">
+              <div class="chart-head">
+                <div>
+                  <span class="eyebrow">CITY JAM SCORE</span>
+                  <strong id="forecastNowLabel">—</strong>
+                </div>
+                <span class="chart-rain-key"><i></i> Rain mm/h</span>
+              </div>
+              <div class="chart-wrap" id="cityChart">
+                <div class="skeleton skeleton-chart"></div>
+              </div>
+            </div>
+
+            <div class="section">
+              <div class="section-head"><h2>Quietest windows</h2><span class="muted">next 24h</span></div>
+              <div class="quiet-grid" id="quietTimes"></div>
+            </div>
+
+            <div class="section card planner">
+              <div class="section-head"><h2>Best time to leave</h2></div>
+              <label class="field">
+                <span>Road</span>
+                <select id="departureCorridor"></select>
+              </label>
+              <div class="seg" id="departureDirection" role="group" aria-label="Direction">
+                <button type="button" data-dir="inbound" class="is-active">Towards city</button>
+                <button type="button" data-dir="outbound">Out of city</button>
+              </div>
+              <div id="departureResult" class="departure-result">
+                <div class="skeleton skeleton-row"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="view is-hidden" data-view="reports" id="view-reports">
+            <div class="view-head">
+              <div>
+                <h2>Community reports</h2>
+                <p>Fresh eyes on the road. Reports fade automatically.</p>
+              </div>
+              <button class="btn btn-small" id="addReportBtn">+ Add</button>
+            </div>
+            <div id="reportsList" class="report-list"></div>
+            <p class="legal-foot">
+              <a href="/privacy.html">Privacy</a>
+              <span aria-hidden="true">·</span>
+              <a href="/terms.html">Terms</a>
+              <span aria-hidden="true">·</span>
+              Estimates, not official traffic data.
+            </p>
+          </section>
+
+          <section class="view is-hidden" data-view="detail" id="view-detail"></section>
+        </div>
+      </section>
+
+      <section class="map-shell" aria-label="Traffic map">
+        <div id="map"></div>
+        <div class="map-legend" id="legend" aria-label="Jam level legend">
+          <span data-level="free">Free</span>
+          <span data-level="light">Light</span>
+          <span data-level="moderate">Moderate</span>
+          <span data-level="heavy">Heavy</span>
+          <span data-level="gridlock">Gridlock</span>
+        </div>
+        <div class="map-actions">
+          <button class="map-btn" id="locateBtn" aria-label="Find my nearest road" title="Find my nearest road">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+          </button>
+          <button class="map-btn report-fab" id="reportBtn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v5M12 17h.01"/><path d="M10.3 3.8 2.4 18a2 2 0 0 0 1.8 3h15.6a2 2 0 0 0 1.8-3L13.7 3.8a2 2 0 0 0-3.4 0Z"/></svg>
+            Report
+          </button>
+        </div>
+        <div class="map-foot">
+          <span class="live-dot"></span>
+          <span id="mapStatus">Connecting…</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal is-hidden" id="reportModal" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
+    <div class="modal-backdrop" data-close></div>
+    <form class="modal-card" id="reportForm">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">COMMUNITY REPORT</span>
+          <h2 id="reportTitle">What are you seeing?</h2>
+        </div>
+        <button type="button" class="icon-btn" data-close aria-label="Close report form">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <div class="type-grid" id="typeGrid" role="radiogroup" aria-label="Report type"></div>
+
+      <label class="field">
+        <span>Road</span>
+        <select id="reportCorridor" required></select>
+      </label>
+
+      <div class="field">
+        <span>How bad is it?</span>
+        <div class="seg" id="severitySeg" role="radiogroup" aria-label="Severity">
+          <button type="button" data-sev="1">Light</button>
+          <button type="button" data-sev="2" class="is-active">Moderate</button>
+          <button type="button" data-sev="3">Severe</button>
+        </div>
+      </div>
+
+      <label class="field">
+        <span>Note <em>optional</em></span>
+        <textarea id="reportNote" maxlength="160" rows="2" placeholder="e.g. police check near Ubungo, traffic backed up"></textarea>
+      </label>
+
+      <p class="form-error is-hidden" id="reportError"></p>
+      <button type="submit" class="btn btn-primary" id="reportSubmit">Send report</button>
+      <p class="form-foot">Reports are public and expire automatically. Please don't include personal details.</p>
+    </form>
+  </div>
+
+  <div class="fatal is-hidden" id="fatal">
+    <div class="fatal-card">
+      <h1>DarJam can't reach the server</h1>
+      <p id="fatalMessage">Check that the app is running, then try again.</p>
+      <button class="btn btn-primary" id="retryBtn">Try again</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/vendor/leaflet/leaflet.js"></script>
+  <script src="/config.js"></script>
+  <script src="/ads.js"></script>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

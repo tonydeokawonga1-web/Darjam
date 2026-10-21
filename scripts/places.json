@@ -1,0 +1,354 @@
+﻿[
+    {
+        "query":  "Kariakoo Market, Dar es Salaam",
+        "name":  "Kariakoo Market Cooperation",
+        "city":  "Dar es Salaam",
+        "street":  "Tandamti Street",
+        "lat":  -6.819286,
+        "lon":  39.2753032
+    },
+    {
+        "query":  "Msimbazi Street, Dar es Salaam",
+        "name":  "Msimbazi Street",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8140229,
+        "lon":  39.2756724
+    },
+    {
+        "query":  "Fire Station, Morogoro Road, Dar es Salaam",
+        "name":  "Fire Station",
+        "city":  "Dar es Salaam",
+        "street":  "Morogoro Road",
+        "lat":  -6.812221,
+        "lon":  39.2740141
+    },
+    {
+        "query":  "Magomeni, Dar es Salaam",
+        "name":  "Magomeni",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.803578,
+        "lon":  39.26046
+    },
+    {
+        "query":  "Ubungo Bus Terminal, Dar es Salaam",
+        "name":  "Ubungo International Bus Terminal",
+        "city":  "Dar es Salaam",
+        "street":  "Morogoro Road",
+        "lat":  -6.7918002,
+        "lon":  39.2112169
+    },
+    {
+        "query":  "Kimara, Dar es Salaam",
+        "name":  "Kimara",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7960499,
+        "lon":  39.1807155
+    },
+    {
+        "query":  "Mbagala, Dar es Salaam",
+        "name":  "Mbagala",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.9001068,
+        "lon":  39.2643503
+    },
+    {
+        "query":  "Tazara Railway Station, Dar es Salaam",
+        "name":  "Dar es Salaam",
+        "city":  "Dar es Salaam",
+        "street":  "Nyerere Road",
+        "lat":  -6.8464084,
+        "lon":  39.2450325
+    },
+    {
+        "query":  "Julius Nyerere International Airport, Dar es Salaam",
+        "name":  "Julius Nyerere International Airport",
+        "city":  "Dar es Salaam",
+        "street":  "Jet Road",
+        "lat":  -6.8741937,
+        "lon":  39.207524
+    },
+    {
+        "query":  "Selander Bridge, Dar es Salaam",
+        "name":  "Selander Bridge",
+        "city":  "Dar es Salaam",
+        "street":  "Selander Bridge",
+        "lat":  -6.7962128,
+        "lon":  39.2813746
+    },
+    {
+        "query":  "Mwenge, Dar es Salaam",
+        "name":  "Mwenge",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7666642,
+        "lon":  39.231338
+    },
+    {
+        "query":  "Mbezi Beach, Dar es Salaam",
+        "name":  "Mbezi Beach",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7285141,
+        "lon":  39.2371086
+    },
+    {
+        "query":  "Kawe, Dar es Salaam",
+        "name":  "Kawe",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7366328,
+        "lon":  39.2222411
+    },
+    {
+        "query":  "Tegeta, Dar es Salaam",
+        "name":  "Tegeta Thermal Power Station",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.6741316,
+        "lon":  39.1841582
+    },
+    {
+        "query":  "Kigamboni, Dar es Salaam",
+        "name":  "Kigamboni",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8254855,
+        "lon":  39.3094074
+    },
+    {
+        "query":  "Kivukoni Ferry, Dar es Salaam",
+        "name":  "\"Ferry/Kivukoni\"",
+        "city":  "Dar es Salaam",
+        "street":  "Barack Obama Drive",
+        "lat":  -6.8194009,
+        "lon":  39.2988143
+    },
+    {
+        "query":  "Central Post Office, Dar es Salaam",
+        "name":  "Dar es Salaam General Post Office",
+        "city":  "Dar es Salaam",
+        "street":  "Azikiwe Street",
+        "lat":  -6.8146287,
+        "lon":  39.2879939
+    },
+    {
+        "query":  "Askari Monument, Dar es Salaam",
+        "name":  "Askari Monument",
+        "city":  "Dar es Salaam",
+        "street":  "Makunganya Street",
+        "lat":  -6.8166331,
+        "lon":  39.2894789
+    },
+    {
+        "query":  "Mlimani City, Dar es Salaam",
+        "name":  "Mlimani City",
+        "city":  "Dar es Salaam",
+        "street":  "Sam Nujoma Road",
+        "lat":  -6.7743876,
+        "lon":  39.2207688
+    },
+    {
+        "query":  "Tabata, Dar es Salaam",
+        "name":  "Tabata",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8281472,
+        "lon":  39.2262105
+    },
+    {
+        "query":  "Ilala, Dar es Salaam",
+        "name":  "Ilala City Council",
+        "city":  "Dar es Salaam",
+        "street":  "Sokoine Drive",
+        "lat":  -6.8208966,
+        "lon":  39.2864223
+    },
+    {
+        "query":  "Temeke, Dar es Salaam",
+        "name":  "Temeke",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8509725,
+        "lon":  39.256723
+    },
+    {
+        "query":  "Chang\u0027ombe, Dar es Salaam",
+        "name":  "Chang\u0027ombe",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8429525,
+        "lon":  39.2626525
+    },
+    {
+        "query":  "Oyster Bay, Dar es Salaam",
+        "name":  "DoubleTree by Hilton Hotel Dar es Salaam - Oyster Bay",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7545671,
+        "lon":  39.2729253
+    },
+    {
+        "query":  "Masaki, Dar es Salaam",
+        "name":  "Masaki",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7576158,
+        "lon":  39.2768276
+    },
+    {
+        "query":  "Mbagala Rangi Tatu, Dar es Salaam",
+        "name":  "KOICA Mbagala Rangi Tatu Hospital",
+        "city":  "Dar es Salaam",
+        "street":  "Mpakani",
+        "lat":  -6.9142118,
+        "lon":  39.270723
+    },
+    {
+        "query":  "Gongo la Mboto, Dar es Salaam",
+        "name":  "Gongo la mboto",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8813318,
+        "lon":  39.1583533
+    },
+    {
+        "query":  "Africana, Dar es Salaam",
+        "name":  "Africana",
+        "city":  "Dar es Salaam",
+        "street":  "Bagamoyo Road",
+        "lat":  -6.7022316,
+        "lon":  39.2072421
+    },
+    {
+        "query":  "Mwananyamala, Dar es Salaam",
+        "name":  "Mwananyamala",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7888888,
+        "lon":  39.2583964
+    },
+    {
+        "query":  "Mabibo, Dar es Salaam",
+        "name":  "Mabibo",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.808352,
+        "lon":  39.2273417
+    },
+    {
+        "query":  "Vingunguti, Dar es Salaam",
+        "name":  "Vingunguti",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8461123,
+        "lon":  39.2273554
+    },
+    {
+        "query":  "Kipawa, Dar es Salaam",
+        "name":  "Kipawa",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8661347,
+        "lon":  39.1964665
+    },
+    {
+        "query":  "Ukonga, Dar es Salaam",
+        "name":  "Ukonga",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8753025,
+        "lon":  39.1692963
+    },
+    {
+        "query":  "Mbezi Luis, Dar es Salaam",
+        "name":  "Mbezi Luis Bus Terminal",
+        "city":  "Dar es Salaam",
+        "street":  "Kwa Yusufu",
+        "lat":  -6.7860276,
+        "lon":  39.1123002
+    },
+    {
+        "query":  "Kunduchi, Dar es Salaam",
+        "name":  "Kunduchi",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.6728737,
+        "lon":  39.2063726
+    },
+    {
+        "query":  "Bunju, Dar es Salaam",
+        "name":  "Bunju Street",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8667765,
+        "lon":  39.2533264
+    },
+    {
+        "query":  "Mbweni, Dar es Salaam",
+        "name":  "Mbweni",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.5767859,
+        "lon":  39.1304557
+    },
+    {
+        "query":  "Kigogo, Dar es Salaam",
+        "name":  "Kigogo",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.8186702,
+        "lon":  39.24599
+    },
+    {
+        "query":  "Muhimbili National Hospital, Dar es Salaam",
+        "name":  "Muhimbili National Hospital",
+        "city":  "Dar es Salaam",
+        "street":  "Muhimbili",
+        "lat":  -6.8076708,
+        "lon":  39.2719596
+    },
+    {
+        "query":  "Tandale, Dar es Salaam",
+        "name":  "Tandale",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7952289,
+        "lon":  39.2408544
+    },
+    {
+        "query":  "Manzese, Dar es Salaam",
+        "name":  "Manzese",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7963792,
+        "lon":  39.2308982
+    },
+    {
+        "query":  "Sinza, Dar es Salaam",
+        "name":  "Sinza",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7830538,
+        "lon":  39.2236435
+    },
+    {
+        "query":  "Kijitonyama, Dar es Salaam",
+        "name":  "Kijitonyama",
+        "city":  "Dar es Salaam",
+        "street":  null,
+        "lat":  -6.7766577,
+        "lon":  39.2433924
+    },
+    {
+        "query":  "Magoni, Dar es Salaam",
+        "name":  "Dar es Salaam",
+        "city":  null,
+        "street":  null,
+        "lat":  -6.8160837,
+        "lon":  39.2803583
+    }
+]

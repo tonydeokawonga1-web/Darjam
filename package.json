@@ -1,0 +1,34 @@
+{
+  "name": "darjam",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Live traffic-jam levels for Dar es Salaam, Tanzania",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "build:data": "node scripts/build-corridors.mjs",
+    "build:web": "node scripts/sync-vendor.mjs",
+    "build:mobile": "node scripts/build-mobile.mjs",
+    "android:sync": "npx cap sync android",
+    "store:shots": "node scripts/capture-store-screenshots.mjs",
+    "test": "node --test",
+    "check": "node --check server/index.js && node --check server/traffic/engine.js && node --check server/traffic/weather.js && node --check client/app.js && node --check client/ads.js && node --check scripts/build-mobile.mjs"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "leaflet": "^1.9.4"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@capacitor-community/admob": "^8.2.1",
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/cli": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/geolocation": "^8.2.4",
+    "@capacitor/share": "^8.0.3"
+  }
+}

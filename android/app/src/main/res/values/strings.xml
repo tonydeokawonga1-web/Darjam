@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DarJam</string>
+    <string name="title_activity_main">DarJam</string>
+    <string name="package_name">tz.darjam.app</string>
+    <string name="custom_url_scheme">tz.darjam.app</string>
+
+    <!-- Google's official test AdMob app ID. Replace with your own
+         (AdMob → Apps → App settings) before uploading a production build. -->
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+</resources>

@@ -1,0 +1,35 @@
+# Render blueprint for the DarJam API + web app.
+# Create a Blueprint in Render and point it at this repository.
+services:
+  - type: web
+    name: darjam
+    runtime: docker
+    plan: starter
+    region: frankfurt
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: DARJAM_REPORTS_FILE
+        value: /app/data/reports.json
+      # Commercial map tiles. Set these once you have a MapTiler (or other) key.
+      - key: DARJAM_TILE_URL
+        sync: false
+      - key: DARJAM_TILE_ATTRIBUTION
+        sync: false
+      - key: DARJAM_TILE_MAX_ZOOM
+        value: "20"
+      # Commercial weather plan (Open-Meteo). Leave unset and set
+      # DARJAM_WEATHER=off to run without live weather.
+      - key: OPEN_METEO_API_KEY
+        sync: false
+      - key: DARJAM_WEATHER
+        value: on
+      # Origins allowed to call the API from the Android WebView.
+      - key: DARJAM_ALLOWED_ORIGINS
+        value: capacitor://localhost,https://localhost
+      - key: NODE_ENV
+        value: production
+    disk:
+      name: darjam-data
+      mountPath: /app/data
+      sizeGB: 1

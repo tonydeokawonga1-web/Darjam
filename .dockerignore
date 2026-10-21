@@ -1,0 +1,12 @@
+node_modules
+android
+.github
+docs
+test
+scripts
+.git
+.gitignore
+*.log
+server/data/reports.json
+server/data/reports.json.tmp
+README.md

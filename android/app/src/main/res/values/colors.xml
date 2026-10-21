@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Matches the app background so the window and system bars don't flash white. -->
+    <color name="colorPrimary">#070C10</color>
+    <color name="colorPrimaryDark">#070C10</color>
+    <color name="colorAccent">#22C55E</color>
+</resources>

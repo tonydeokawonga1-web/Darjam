@@ -1,0 +1,11 @@
+{
+  "appId": "tz.darjam.app",
+  "appName": "DarJam",
+  "webDir": "client",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}
