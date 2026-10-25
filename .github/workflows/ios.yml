@@ -1,0 +1,83 @@
+name: iOS release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync web bundle
+        env:
+          DARJAM_API_BASE: ${{ vars.DARJAM_API_BASE }}
+          DARJAM_ADMOB_BANNER: ${{ vars.DARJAM_ADMOB_BANNER }}
+          DARJAM_ADMOB_INTERSTITIAL: ${{ vars.DARJAM_ADMOB_INTERSTITIAL }}
+          DARJAM_ADMOB_TEST: ${{ vars.DARJAM_ADMOB_TEST || '1' }}
+        run: node scripts/build-mobile.mjs --api-base "$DARJAM_API_BASE" --ads --platform ios
+
+      - name: Import signing certificate
+        env:
+          APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+        run: |
+          echo "$APPLE_CERTIFICATE_BASE64" | base64 -d > "$RUNNER_TEMP/darjam.p12"
+          security create-keychain -p "" build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p "" build.keychain
+          security import "$RUNNER_TEMP/darjam.p12" -k build.keychain -P "$APPLE_CERTIFICATE_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" build.keychain
+
+      - name: Install provisioning profile
+        env:
+          APPLE_PROVISIONING_PROFILE_BASE64: ${{ secrets.APPLE_PROVISIONING_PROFILE_BASE64 }}
+        run: |
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          echo "$APPLE_PROVISIONING_PROFILE_BASE64" | base64 -d > ~/Library/MobileDevice/Provisioning\ Profiles/darjam.mobileprovision
+
+      - name: Build and archive
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_PROVISIONING_PROFILE_NAME: ${{ secrets.APPLE_PROVISIONING_PROFILE_NAME }}
+          DARJAM_VERSION_CODE: ${{ github.run_number }}
+          DARJAM_VERSION_NAME: ${{ vars.DARJAM_VERSION_NAME || '1.0.0' }}
+        run: |
+          xcodebuild -workspace ios/App/App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/DarJam.xcarchive" \
+            MARKETING_VERSION="$DARJAM_VERSION_NAME" \
+            CURRENT_PROJECT_VERSION="$DARJAM_VERSION_CODE" \
+            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" \
+            archive
+
+      - name: Export IPA
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_PROVISIONING_PROFILE_NAME: ${{ secrets.APPLE_PROVISIONING_PROFILE_NAME }}
+        run: |
+          sed -i '' "s/\$(APPLE_TEAM_ID)/$APPLE_TEAM_ID/g; s/\$(APPLE_PROVISIONING_PROFILE_NAME)/$APPLE_PROVISIONING_PROFILE_NAME/g" ios/ExportOptions.plist
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/DarJam.xcarchive" \
+            -exportPath "$RUNNER_TEMP/export" \
+            -exportOptionsPlist ios/ExportOptions.plist
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: darjam-release-ipa
+          path: ${{ runner.temp }}/export/*.ipa
+          if-no-files-found: error

@@ -78,6 +78,9 @@
 
   (async () => {
     try {
+      if (capacitor?.getPlatform?.() === 'ios') {
+        try { await AdMob.requestTrackingAuthorization(); } catch (err) { console.warn('[darjam] ATT request skipped', err); }
+      }
       await AdMob.initialize({ initializeForTesting: testMode });
       const consent = await askConsent();
       if (consent && consent.canRequestAds === false) {

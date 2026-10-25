@@ -156,6 +156,27 @@ cd android
 - Store copy and graphics: `docs/store/`.
 - Full publishing path, forms and payout setup: **[docs/PLAY_LAUNCH.md](docs/PLAY_LAUNCH.md)**.
 
+## iOS and App Store
+
+The iOS app is the same Capacitor shell with the same client. It needs an Apple
+Developer account (US$99/year) and a Mac — or the included GitHub Actions
+workflow on `macos-latest`.
+
+```bash
+npm run build:mobile -- --api-base https://api.example.com --ads --platform ios
+cd ios/App
+# Open App.xcworkspace in Xcode on a Mac, then Archive → Distribute
+```
+
+- Bundle id `tz.darjam.app`; `MARKETING_VERSION`/`CURRENT_PROJECT_VERSION` come from
+  `DARJAM_VERSION_NAME`/`DARJAM_VERSION_CODE`.
+- iOS ad units are separate from Android ones; set
+  `DARJAM_ADMOB_BANNER_IOS`/`DARJAM_ADMOB_INTERSTITIAL_IOS` (or reuse the
+  generic ones) before building.
+- `Info.plist` already declares location and tracking usage; the AdMob SDK's
+  privacy manifest is bundled by the SDK.
+- Full submission checklist: **[docs/APPSTORE_LAUNCH.md](docs/APPSTORE_LAUNCH.md)**.
+
 ## Project layout
 
 ```
@@ -175,8 +196,10 @@ client/
   terms.html          Terms of use
   fonts/              Self-hosted Manrope woff2 files
 android/              Capacitor Android project (icons, manifest, signing)
+ios/                  Capacitor iOS project (Xcode workspace, icons, Info.plist)
 docs/
   PLAY_LAUNCH.md      Play Console, signing, testing and payout checklist
+  APPSTORE_LAUNCH.md  App Store submission checklist
   store/              Listing copy, icon, feature graphic, screenshots
 scripts/
   build-corridors.mjs Regenerates corridor data from OSRM
