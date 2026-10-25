@@ -72,8 +72,8 @@ const original = await readFile(CONFIG_PATH, 'utf8');
 try {
   await writeFile(CONFIG_PATH, generated);
   run(process.execPath, ['scripts/sync-vendor.mjs']);
-  run(process.execPath, [path.join(ROOT, 'node_modules', '@capacitor', 'cli', 'bin', 'capacitor'), 'sync', 'android']);
-  console.log(`\n[darjam] Android web bundle synced (API: ${apiBase}, ads: ${adsEnabled ? 'on' : 'off'})`);
+  run(process.execPath, [path.join(ROOT, 'node_modules', '@capacitor', 'cli', 'bin', 'capacitor'), 'sync', platform]);
+  console.log(`\n[darjam] ${platform} web bundle synced (API: ${apiBase}, ads: ${adsEnabled ? 'on' : 'off'})`);
 } finally {
   await writeFile(CONFIG_PATH, original);
 }
